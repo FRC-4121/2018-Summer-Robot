@@ -74,7 +74,7 @@ public class AutoDrive extends Command {
     protected void execute() {
     	
 //    	angleCorrection = pidControl.Run(Robot.oi.MainGyro.getAngle(), targetAngle);
-    	angleError = Robot.driveAngle.getDouble(0)-targetAngle;
+    	angleError = Robot.oi.MainGyro.getAngle()-targetAngle;
     	angleCorrection = RobotMap.kP_Straight*angleError;
     	Robot.driveTrain.autoDrive(direction*RobotMap.AUTO_DRIVE_SPEED + angleCorrection, direction*RobotMap.AUTO_DRIVE_SPEED - angleCorrection);    	    	
 		SmartDashboard.putString("Angle Correction", Double.toString(angleCorrection));

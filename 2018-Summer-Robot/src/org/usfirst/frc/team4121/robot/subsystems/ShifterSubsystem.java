@@ -9,13 +9,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *	Shifter subsystem
- *
- *	@author Ben Hayden 2.0  (saliva crustyman)
  */
 public class ShifterSubsystem extends Subsystem {
 	
 	//Initializes the compressor
-	//I do not know if we need this or not
 	Compressor compressor = new Compressor(RobotMap.COMPRESSOR);
 	
 	//initializes the double solenoid

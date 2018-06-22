@@ -24,10 +24,11 @@ public class RobotMap {
 
 //	Motor Controller Constants - Competition Robots
 	public static final int LEFT_MOTOR_MASTER = 7;
-	public static final int LEFT_MOTOR_SLAVE = 15;
+	public static final int LEFT_MOTOR_SLAVE_1 = 15;
+	public static final int LEFT_MOTOR_SLAVE_2 = 100000;
 	public static final int RIGHT_MOTOR_MASTER = 4;
-	public static final int RIGHT_MOTOR_SLAVE = 1;
-	public static final int CLIMBER1 = 8;
+	public static final int RIGHT_MOTOR_SLAVE_1 = 1;
+	public static final int RIGHT_MOTOR_SLAVE_2 = 1000;
 	public static final int ENDMOTOR1 = 6;
 	public static final int ENDMOTOR2 = 3; 
 	public static final int ELEVATOR_MOTOR_MASTER = 2;
@@ -41,8 +42,6 @@ public class RobotMap {
 	public static final double DRIVE_SPEED = 0.8;
 	public static double AUTO_DRIVE_SPEED = .95;
 	public static double AUTO_TURN_SPEED = 0.3;
-	public static double CLIMBER_SPEED = -1.0; //should be negative
-	public static double CLIMBER_REVERSE_SPEED = 1.0; //should be positive
 
 	//Miscellaneous
 	public static int DIRECTION_MULTIPLIER = 1;
@@ -51,8 +50,6 @@ public class RobotMap {
 	public static double TURN_ANGLE_TOLERANCE = .001;
 	public static char AUTO_SWITCH_POSITION;
 	public static char AUTO_SCALE_POSITION;
-	public static String AUTO_SWITCH_AND_SCALE;
-	public static boolean ABORT_CUBE= false;
 
 	//PID values
 	public static double kP_Straight = 0.03;
@@ -78,10 +75,7 @@ public class RobotMap {
 
 	//Elevator target positions
 	public static final double dPosSwitch = 30 ;
-	public static final double dPosScale = 74;
 	public static final double dPosPyramid = 10;
-	public static final double dPosBumpUp = 2 ;
-	public static final double dPosBumpDown = -2 ;
 	public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
 
 	//Elevator drive ratios

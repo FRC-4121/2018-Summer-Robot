@@ -56,7 +56,7 @@ public class AutoTurn extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 
-		angleCorrection = pidControl.Run(Robot.driveAngle.getDouble(0), targetAngle);
+		angleCorrection = pidControl.Run(Robot.oi.MainGyro.getAngle(), targetAngle);
 		motorOutput = angleCorrection * RobotMap.AUTO_TURN_SPEED;
 		Robot.driveTrain.autoDrive(motorOutput, -motorOutput);  
 
@@ -80,7 +80,7 @@ public class AutoTurn extends Command {
 		else
 		{
 
-			angleError = Robot.driveAngle.getDouble(0) - targetAngle;
+			angleError = Robot.oi.MainGyro.getAngle() - targetAngle;
 			if (Math.abs(angleError) <= RobotMap.TURN_ANGLE_TOLERANCE)
 			{
 				thereYet = true;

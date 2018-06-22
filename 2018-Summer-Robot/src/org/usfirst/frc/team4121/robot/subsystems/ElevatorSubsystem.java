@@ -1,16 +1,13 @@
 package org.usfirst.frc.team4121.robot.subsystems;
 
-import org.usfirst.frc.team4121.robot.Robot;
 import org.usfirst.frc.team4121.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -38,7 +35,6 @@ public class ElevatorSubsystem extends Subsystem {
 	public double accelUp ;
 	public double accelDn ;
 	public double targetPosSwitch ;
-	public double targetPosScale ;
 	public double targetPosPyramid;
 	public double bumpUp ;
 	public double bumpDn;
@@ -123,7 +119,6 @@ public class ElevatorSubsystem extends Subsystem {
 		accelUp = RobotMap.kAccelerationUp/inchesPerRev*encoderPulsesPerOutputRev/10 ;
 		accelDn = RobotMap.kAccelerationDown/inchesPerRev*encoderPulsesPerOutputRev/10 ;
 		targetPosSwitch = RobotMap.dPosSwitch/inchesPerRev*4096/RobotMap.dFudgeFactor;
-		targetPosScale = RobotMap.dPosScale/inchesPerRev*4096/RobotMap.dFudgeFactor ;
 		targetPosPyramid = RobotMap.dPosPyramid/inchesPerRev*4096/RobotMap.dFudgeFactor;
 		bumpUp = RobotMap.dPosBumpUp/inchesPerRev*4096/RobotMap.dFudgeFactor ;
 		bumpDn = RobotMap.dPosBumpDown/inchesPerRev*4096/RobotMap.dFudgeFactor ;
@@ -150,26 +145,6 @@ public class ElevatorSubsystem extends Subsystem {
 		
 	}
 
-	
-	public void runToScale() // run to scale height
-	{
-		/* go to scale height */
-		oldTargetPos = targetPos;
-		targetPos = targetPosScale;
-		if (targetPos > oldTargetPos) {
-			m_motor.configMotionCruiseVelocity((int) cruiseVelocityUp , RobotMap.kTimeoutMs);
-			m_motor.configMotionAcceleration((int) accelUp, RobotMap.kTimeoutMs);
-			m_motor.set(ControlMode.MotionMagic, targetPos);
-		} 
-		else {
-			m_motor.configMotionCruiseVelocity((int) cruiseVelocityDn, RobotMap.kTimeoutMs);
-			m_motor.configMotionAcceleration((int) accelDn, RobotMap.kTimeoutMs);
-			m_motor.set(ControlMode.MotionMagic, targetPos);
-		}
-	}
-
-
-
 	public void runToSwitch() // run to switch height
 	{
 		oldTargetPos = targetPos;
@@ -186,38 +161,6 @@ public class ElevatorSubsystem extends Subsystem {
 		}
 		
 	}
-	
-/* new functions here - bump up and bump down */
-
-	public void bumpUp() // bump up bump up distance
-	{
-		targetPos += bumpUp ;
-		if(targetPos > targetPosScale) //if trying to go outside of max height range, will just run to scale
-		{
-			targetPos = targetPosScale;
-		}
-		
-		m_motor.configMotionCruiseVelocity((int) cruiseVelocityUp, RobotMap.kTimeoutMs);
-		m_motor.configMotionAcceleration((int) accelUp, RobotMap.kTimeoutMs);
-		m_motor.set(ControlMode.MotionMagic, targetPos);
-		
-	}
-
-	
-	public void bumpDown() // bump down height
-	{
-		targetPos += bumpDn ;
-		if(targetPos < 0) //change 12 to match bumpDown value
-		{
-			targetPos = 0;
-		}
-		
-		m_motor.configMotionCruiseVelocity((int) cruiseVelocityDn, RobotMap.kTimeoutMs);
-		m_motor.configMotionAcceleration((int) accelDn, RobotMap.kTimeoutMs);
-		m_motor.set(ControlMode.MotionMagic, targetPos);
-		
-	}
-
 	
 	public void goToHome() // go to home
 	{

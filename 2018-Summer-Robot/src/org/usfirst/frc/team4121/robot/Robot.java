@@ -1,26 +1,14 @@
 package org.usfirst.frc.team4121.robot;
 
-import org.usfirst.frc.team4121.robot.commands.AutoRightSideNoTurnCommandGroup;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotLeftScaleLeft1Cube;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotLeftScaleLeft2Cubes;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotLeftScaleRight1Cube;
 import org.usfirst.frc.team4121.robot.commands.AutoRobotLeftSwitchLeft1Cube;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotRightScaleLeft1Cube;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotRightScaleRight1Cube;
-import org.usfirst.frc.team4121.robot.commands.AutoRobotRightScaleRight2Cubes;
 import org.usfirst.frc.team4121.robot.commands.AutoRobotRightSwitchRight1Cube;
-import org.usfirst.frc.team4121.robot.commands.AutoStopCommand;
 import org.usfirst.frc.team4121.robot.commands.AutoStraightCommandGroup;
-import org.usfirst.frc.team4121.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team4121.robot.subsystems.EndEffector;
 import org.usfirst.frc.team4121.robot.subsystems.ShifterSubsystem;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -30,11 +18,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,8 +25,6 @@ import java.util.*;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
- * 
- * @author Saliva Crustyman
  */
 public class Robot extends IterativeRobot {
 
@@ -51,30 +32,9 @@ public class Robot extends IterativeRobot {
 	public static UsbCamera cam;
 	public static CameraServer server;
 
-
-	//Network tables
-	public static NetworkTableInstance dataTableInstance;
-	public static NetworkTable visionTable;
-	public static NetworkTable navxTable;
-	public static NetworkTableEntry robotStop;
-	public static NetworkTableEntry cubeHeight;
-	public static NetworkTableEntry cubeAngle;
-	public static NetworkTableEntry cubeDistance;
-	public static NetworkTableEntry cubeOffset;
-	public static NetworkTableEntry cubePercentWidth;
-	public static NetworkTableEntry driveAngle;
-	public static NetworkTableEntry yVelocity;
-	public static NetworkTableEntry xVelocity;
-	public static NetworkTableEntry yDisplacement;
-	public static NetworkTableEntry xDisplacement;
-	public static NetworkTableEntry zeroGyro;
-	public static NetworkTableEntry writeVideo;
-
-
 	//Subsystems
 	public static DriveTrainSubsystem driveTrain;
 	public static ShifterSubsystem shifter;
-	public static ClimberSubsystem climber;
 	public static EndEffector end;
 	public static ElevatorSubsystem elevator;
 
@@ -106,20 +66,8 @@ public class Robot extends IterativeRobot {
 	private boolean autoCommandStarted = false;
 	public static String myTarget;
 	public static String mySide;
-	public static double numberOfCubes;
 
-
-	//Time
-	public Date currentDate;
-	public SimpleDateFormat fullDateFormat;
-	public SimpleDateFormat fullTimeFormat;
-
-
-	//Logging
-	//FileWriter logger;
-
-
-
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -127,88 +75,33 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 
-		//Initialize NetworkTables
-		dataTableInstance = NetworkTableInstance.getDefault();
-		visionTable = dataTableInstance.getTable("vision");
-		navxTable = dataTableInstance.getTable("navx");
-
-
-		//Initialize NetworkTable entries
-		robotStop = visionTable.getEntry("RobotStop");
-		cubeAngle = visionTable.getEntry("CubeAngle");
-		cubeDistance = visionTable.getEntry("CubeDistance");
-		cubeOffset = visionTable.getEntry("CubeOffset");
-		cubePercentWidth = visionTable.getEntry("CubePercentWidth");
-		writeVideo = visionTable.getEntry("WriteVideo");
-		cubeHeight = visionTable.getEntry("cubeHeight");
-		driveAngle = navxTable.getEntry("DriveAngle");
-		yVelocity = navxTable.getEntry("YVelocity");
-		xVelocity = navxTable.getEntry("XVelocity");
-		yDisplacement = navxTable.getEntry("YDisplacement");
-		xDisplacement = navxTable.getEntry("XDisplacement");
-		zeroGyro = navxTable.getEntry("ZeroGyro");
-
-
-		//Initialize NetworkTAble values
-		robotStop.setDouble(0.0);
-
-
 		//Initialize subsystems		
 		driveTrain = new DriveTrainSubsystem();
 		shifter = new ShifterSubsystem();
-		climber = new ClimberSubsystem();
 		end = new EndEffector();
 		elevator = new ElevatorSubsystem();
 		oi = new OI();
 
 
 		//Initialize dashboard choosers
-		//!!Update this to reflect any new auto code!!
-//		chooser = new SendableChooser<>();
-//		chooser.addObject("Do nothing", new AutoStopCommand());
-//		chooser.addDefault("Straight", new AutoStraightCommandGroup());
-//		chooser.addObject("Left Switch", new AutoRobotLeftSwitchLeft1Cube());
-//		chooser.addObject("Right Switch", new AutoRobotRightSwitchRight1Cube());
-//		chooser.addObject("Right Straight", new AutoRightSideNoTurnCommandGroup());
-//		chooser.addObject("Left Scale", new AutoRobotLeftScaleLeft1Cube());
-//		chooser.addObject("Right Scale", new AutoRobotRightScaleRight1Cube());
-//		chooser.addObject("Rightside Opposite Scale", new AutoRobotRightScaleLeft1Cube());
-//		chooser.addObject("Leftside Opposite Scale", new AutoRobotLeftScaleRight1Cube());
-//		SmartDashboard.putData("Auto Mode:", chooser);
+		//(not using due to randomness of auto this year)
+		//chooser = new SendableChooser<>();
+		//chooser.addObject("Do nothing", new AutoStopCommand());
+		//SmartDashboard.putData("Auto Mode:", chooser);
 
 		//Initialize variables
 		distanceTraveled = 0.0;
 		angleTraveled = 0.0;
 		mySide = "";
 		myTarget = "";
-		numberOfCubes = 1.0;
 
 		//Initialize Smartdashboard entries
 		SmartDashboard.putString("Target", myTarget);
 		SmartDashboard.putString("Side", mySide);
-		SmartDashboard.putNumber("Cubes", numberOfCubes);
-
-		//Initialize date variables
-		currentDate = new Date();
-		fullDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-		fullTimeFormat = new SimpleDateFormat("hh:mm:ss");
-
-
-		//Initialize logging file
-		//		String logFilename = "C:\\Users\\team4\\Logs\\RobotLog" + fullDateFormat.format(currentDate) + ".txt";
-		//		try
-		//		{
-		//			logger = new FileWriter(logFilename, true);
-		//		}
-		//		catch (IOException e)
-		//		{
-		//			
-		//		}
 
 	}
 
-
-	void Disabled() {
+	public void Disabled() {
 
 		while(isDisabled()) {
 
@@ -225,15 +118,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 
-		//Close log file
-		//		try
-		//		{
-		//			logger.close();
-		//		}
-		//		catch (IOException e)
-		//		{
-		//			System.out.println(e);
-		//		}
 
 	}
 
@@ -265,8 +149,8 @@ public class Robot extends IterativeRobot {
 		autoCommandStarted = false;
 
 
-		//Calibrate the main gyro
-		zeroGyro.setDouble(1.0);
+		//Calibrate the main gyro (this may not be the correct method)
+		Robot.oi.MainGyro.calibrate();
 
 
 		//Reset encoders
@@ -276,25 +160,9 @@ public class Robot extends IterativeRobot {
 
 		//Get game related data from SmartDashboard
 		mySide = SmartDashboard.getString("Side", "LEFT");
-		myTarget = SmartDashboard.getString("Target", "SCALE");
-		numberOfCubes = SmartDashboard.getNumber("Cubes", 1.0);
+		myTarget = SmartDashboard.getString("Target", "SWITCH");
 
-		//		currentDate = new Date();
-		//		String message = fullTimeFormat.format(currentDate) + "==>  Robot Start Side: " + mySide;
-		//		String message2 = fullTimeFormat.format(currentDate) + "==>  Auto Target: " + myTarget;
-		//		String message3 = fullTimeFormat.format(currentDate) + "==>  Number of Cubes: " + numberOfCubes;
-		//		try
-		//		{
-		//			logger.write(message);
-		//			logger.write(message2);
-		//			logger.write(message3);
-		//		}
-		//		catch (IOException e)
-		//		{
-		//
-		//		}
-
-		//Get selected autonomous command
+		//Get selected autonomous command (again, not using due to auto setup)
 		//autonomousCommand = chooser.getSelected();
 
 
@@ -314,10 +182,6 @@ public class Robot extends IterativeRobot {
 		//in case the game data is not properly set, we give the field 10 seconds, then default to AutoStraightCommandGroup
 		stopTime = 10;
 
-		SmartDashboard.putString("Test Target", myTarget);
-		SmartDashboard.putString("Test Side", mySide);
-		SmartDashboard.putNumber("Test Number Of Cubes", numberOfCubes);
-
 		if(stopTime <= timer.get() - startTime && gameData == null) { //timer check code
 
 			//drive forward if it's been 10 seconds w/o game data
@@ -326,18 +190,6 @@ public class Robot extends IterativeRobot {
 				autonomousCommand.start();
 				autoCommandStarted = true;
 			}
-
-			//Log message
-			//			currentDate = new Date();
-			//			String message = fullTimeFormat.format(currentDate) + "==>  Game data not received wthin 10 seconds.  Default command used.";
-			//			try
-			//			{
-			//				logger.write(message);
-			//			}
-			//			catch (IOException e)
-			//			{
-			//
-			//			}
 
 		} else { //if timer hasn't stopped yet, grab the data
 
@@ -349,137 +201,42 @@ public class Robot extends IterativeRobot {
 				//get individual strings
 				gameData = testGameData;
 				RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0);
-				RobotMap.AUTO_SCALE_POSITION = gameData.charAt(1);
-				RobotMap.AUTO_SWITCH_AND_SCALE = gameData.substring(2);
-
-
-				//				//Log message
-				//				currentDate = new Date();
-				//				String message = fullTimeFormat.format(currentDate) + "==>  Game data received.  Data = " + gameData;
-				//				try
-				//				{
-				//					logger.write(message);
-				//				}
-				//				catch (IOException e)
-				//				{
-				//
-				//				}
-
 
 				//determine which command to run
 				if (mySide.toUpperCase().equals("LEFT"))
 				{
-
-					if (myTarget.toUpperCase().equals("SWITCH"))
+					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
 					{
-
-						if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
-							}
-
-						}
-						else
-						{
-							autonomousCommand = new AutoStraightCommandGroup();							
-						}
-
+						autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
 					}
 					else
 					{
-
-						if (RobotMap.AUTO_SCALE_POSITION == 'L')
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotLeftScaleLeft1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotLeftScaleLeft2Cubes();
-							}
-
-						}
-						else
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotLeftScaleRight1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotLeftScaleRight1Cube();
-							}
-
-						}
-
+						autonomousCommand = new AutoStraightCommandGroup();							
 					}
-
+					
+				}
+				else if (mySide.toUpperCase().equals("CENTER"))
+				{
+					
+					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
+					{
+						//autonomousCommand = new AutoRobotCenterSwitchLeft();
+					}
+					else
+					{
+						//autonomousCommand = new AutoRobotCenterSwitchRight();
+					}
+					
 				}
 				else
 				{
-
-					if (myTarget.toUpperCase().equals("SWITCH"))
+					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
 					{
-
-						if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-						{
-							autonomousCommand = new AutoStraightCommandGroup();														
-						}
-						else
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotRightSwitchRight1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotRightSwitchRight1Cube();
-							}
-
-						}
-
+						autonomousCommand = new AutoStraightCommandGroup();														
 					}
 					else
 					{
-
-						if (RobotMap.AUTO_SCALE_POSITION == 'L')
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotRightScaleLeft1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotRightScaleLeft1Cube();
-							}
-
-						}
-						else
-						{
-
-							if (numberOfCubes == 1.0)
-							{
-								autonomousCommand = new AutoRobotRightScaleRight1Cube();
-							}
-							else
-							{
-								autonomousCommand = new AutoRobotRightScaleRight2Cubes();
-							}
-
-						}
-
+						autonomousCommand = new AutoRobotRightSwitchRight1Cube();
 					}
 
 				}
@@ -488,24 +245,19 @@ public class Robot extends IterativeRobot {
 
 		}
 
-
 		//Start the selected command
 		if(!autoCommandStarted && gameData != null) 
 		{
-
 			autonomousCommand.start();
 			autoCommandStarted = true;
 
 		}
 
-
 		//Start autonomous scheduler
 		Scheduler.getInstance().run();
 
-
 		//Put key values on smart dashboard
 		SmartDashboard.putString("Gear Position: ", shifter.gearPosition());
-
 	}
 
 
@@ -541,9 +293,6 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putNumber("Slave Current", Robot.elevator.m_motor2_follower.getOutputCurrent());
 		//SmartDashboard.putNumber("Master Output", Robot.elevator.m_motor.getMotorOutputPercent());
 		//SmartDashboard.putNumber("Slave Output", Robot.elevator.m_motor2_follower.getMotorOutputPercent());
-
-
-
 	}
 
 
