@@ -14,14 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ElevatorSubsystem extends Subsystem {
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
-
-//	public WPI_TalonSRX m_motor = new WPI_TalonSRX (RobotMap.ELEVATOR_MOTOR_MASTER);
-//	public WPI_TalonSRX m_motor2_follower = new WPI_TalonSRX (RobotMap.ELEVATOR_MOTOR_SLAVE);  old code
-	
-
 	public TalonSRX m_motor = new TalonSRX (RobotMap.ELEVATOR_MOTOR_MASTER);
 	public TalonSRX m_motor2_follower = new TalonSRX (RobotMap.ELEVATOR_MOTOR_SLAVE);
 
