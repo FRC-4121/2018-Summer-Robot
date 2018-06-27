@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -30,13 +31,15 @@ public class Robot extends IterativeRobot {
 
 	//Camera Stuff
 	public static UsbCamera cam;
-	public static CameraServer server;
+	public static CameraServer camServer;
 
 	//Subsystems
 	public static DriveTrainSubsystem driveTrain;
 	public static ShifterSubsystem shifter;
 	public static EndEffector end;
 	public static ElevatorSubsystem elevator;
+
+	public double leftTrigger, rightTrigger;
 
 
 	//Sensors and inputs
@@ -67,7 +70,7 @@ public class Robot extends IterativeRobot {
 	public static String myTarget;
 	public static String mySide;
 
-	
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -89,6 +92,14 @@ public class Robot extends IterativeRobot {
 		//chooser.addObject("Do nothing", new AutoStopCommand());
 		//SmartDashboard.putData("Auto Mode:", chooser);
 
+		//Configure the camera for the robot
+		camServer = CameraServer.getInstance();		
+		Robot.cam = new UsbCamera("cam0", 0);		
+		Robot.camServer.addCamera(Robot.cam);		
+		Robot.cam.setResolution(320, 240);
+		Robot.cam.setBrightness(10);		
+		Robot.camServer.startAutomaticCapture(Robot.cam);
+		
 		//Initialize variables
 		distanceTraveled = 0.0;
 		angleTraveled = 0.0;
@@ -213,11 +224,11 @@ public class Robot extends IterativeRobot {
 					{
 						autonomousCommand = new AutoStraightCommandGroup();							
 					}
-					
+
 				}
 				else if (mySide.toUpperCase().equals("CENTER"))
 				{
-					
+
 					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
 					{
 						//autonomousCommand = new AutoRobotCenterSwitchLeft();
@@ -226,7 +237,7 @@ public class Robot extends IterativeRobot {
 					{
 						//autonomousCommand = new AutoRobotCenterSwitchRight();
 					}
-					
+
 				}
 				else
 				{
@@ -287,7 +298,7 @@ public class Robot extends IterativeRobot {
 
 		//Put key values on the SmartDashboard
 		SmartDashboard.putString("Gear Postion: ", shifter.gearPosition());
-		SmartDashboard.putString("Drive Direction:", Integer.toString(RobotMap.DIRECTION_MULTIPLIER));		
+		SmartDashboard.putString("Drive Direction:", Integer.toString(RobotMap.DIRECTION_MULTIPLIER));
 
 		//SmartDashboard.putNumber("Master Current", Robot.elevator.m_motor.getOutputCurrent());
 		//SmartDashboard.putNumber("Slave Current", Robot.elevator.m_motor2_follower.getOutputCurrent());

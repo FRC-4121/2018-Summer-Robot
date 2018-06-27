@@ -112,10 +112,6 @@ public class ElevatorSubsystem extends Subsystem {
 		accelDn = RobotMap.kAccelerationDown/inchesPerRev*encoderPulsesPerOutputRev/10 ;
 		targetPosSwitch = RobotMap.dPosSwitch/inchesPerRev*4096/RobotMap.dFudgeFactor;
 		targetPosPyramid = RobotMap.dPosPyramid/inchesPerRev*4096/RobotMap.dFudgeFactor;
-		bumpUp = RobotMap.dPosBumpUp/inchesPerRev*4096/RobotMap.dFudgeFactor ;
-		bumpDn = RobotMap.dPosBumpDown/inchesPerRev*4096/RobotMap.dFudgeFactor ;
-		
-
 		
 		/* zero the sensor */
 		m_motor.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
