@@ -22,7 +22,7 @@ public class RobotMap {
 //	public static final int ELEVATOR_MOTOR_SLAVE = 7;
 //	public static final int ANGLEMOTOR = 9;
 
-//	Motor Controller Constants - Competition Robots
+//	Motor Controller Constants - !!!!FIX THESE FOR NEW RoBOT!
 	public static final int LEFT_MOTOR_MASTER = 7;
 	public static final int LEFT_MOTOR_SLAVE_1 = 15;
 	public static final int LEFT_MOTOR_SLAVE_2 = 100000;
@@ -32,7 +32,6 @@ public class RobotMap {
 	public static final int ENDMOTOR1 = 6;
 	public static final int ENDMOTOR2 = 3; 
 	public static final int ELEVATOR_MOTOR_MASTER = 2;
-	public static final int ELEVATOR_MOTOR_SLAVE = 0;
 	public static final int ANGLEMOTOR = 9; //need to change value
 
 	//Motor Speeds

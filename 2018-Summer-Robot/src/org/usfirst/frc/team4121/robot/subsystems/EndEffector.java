@@ -6,7 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class EndEffector extends Subsystem {
 
-	public WPI_TalonSRX endmotor1 = new WPI_TalonSRX(RobotMap.ENDMOTOR1);
+	public Spark endmotor1 = new Spark(RobotMap.ENDMOTOR1);
 	public WPI_TalonSRX endmotor2 = new WPI_TalonSRX(RobotMap.ENDMOTOR2);
-	public WPI_TalonSRX anglemotor = new WPI_TalonSRX(RobotMap.ANGLEMOTOR);
+	public Spark anglemotor = new Spark(RobotMap.ANGLEMOTOR);
 	
 	private Timer wheelTimer = new Timer();
 	private double startTime;

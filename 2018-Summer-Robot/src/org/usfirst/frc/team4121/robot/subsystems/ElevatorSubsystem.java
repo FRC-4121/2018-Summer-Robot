@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ElevatorSubsystem extends Subsystem {
 
 	public WPI_TalonSRX m_motor = new WPI_TalonSRX (RobotMap.ELEVATOR_MOTOR_MASTER);
-	public WPI_TalonSRX m_motor2_follower = new WPI_TalonSRX (RobotMap.ELEVATOR_MOTOR_SLAVE);
+	//public WPI_TalonSRX m_motor2_follower = new WPI_TalonSRX (RobotMap.ELEVATOR_MOTOR_SLAVE);
 
 //	public double targetPos = 0;
 //	public double oldTargetPos;
@@ -36,7 +36,7 @@ public class ElevatorSubsystem extends Subsystem {
 	public void runElevator(double speed) {
 		
 		m_motor.set(speed);
-		m_motor2_follower.set(speed);
+		//m_motor2_follower.set(speed);
 	}
 //
 //	
