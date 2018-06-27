@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4121.robot;
 
+import org.usfirst.frc.team4121.robot.commands.AutoRobotCenterSwitchLeft;
+import org.usfirst.frc.team4121.robot.commands.AutoRobotCenterSwitchRight;
 import org.usfirst.frc.team4121.robot.commands.AutoRobotLeftSwitchLeft1Cube;
 import org.usfirst.frc.team4121.robot.commands.AutoRobotRightSwitchRight1Cube;
 import org.usfirst.frc.team4121.robot.commands.AutoStraightCommandGroup;
@@ -13,10 +15,8 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -39,27 +39,20 @@ public class Robot extends IterativeRobot {
 	public static EndEffector end;
 	public static ElevatorSubsystem elevator;
 
-	public double leftTrigger, rightTrigger;
-
-
 	//Sensors and inputs
 	public static OI oi;
 
-
 	//SmartDashboard chooser
-	private SendableChooser<Command> chooser;
-
+	//private SendableChooser<Command> chooser;
 
 	//Commands
 	private Command autonomousCommand;
-
 
 	//encoder math values
 	public static double distanceTraveled;
 	public static double angleTraveled;
 	public static double leftDistance;
 	public static double rightDistance;
-
 
 	//2018 Game specific variables
 	public static String gameData = null;
@@ -96,7 +89,7 @@ public class Robot extends IterativeRobot {
 		camServer = CameraServer.getInstance();		
 		Robot.cam = new UsbCamera("cam0", 0);		
 		Robot.camServer.addCamera(Robot.cam);		
-		Robot.cam.setResolution(320, 240);
+		Robot.cam.setResolution(RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
 		Robot.cam.setBrightness(10);		
 		Robot.camServer.startAutomaticCapture(Robot.cam);
 		
@@ -112,7 +105,7 @@ public class Robot extends IterativeRobot {
 
 	}
 
-	public void Disabled() {
+	public void disabled() {
 
 		while(isDisabled()) {
 
@@ -159,15 +152,12 @@ public class Robot extends IterativeRobot {
 		//Set auto flags
 		autoCommandStarted = false;
 
-
 		//Calibrate the main gyro (this may not be the correct method)
 		Robot.oi.MainGyro.calibrate();
-
 
 		//Reset encoders
 		RobotMap.LEFT_STARTING_POSITION = Robot.driveTrain.getLeftEncoderPosition();
 		RobotMap.RIGHT_STARTING_POSITION = Robot.driveTrain.getRightEncoderPosition();
-
 
 		//Get game related data from SmartDashboard
 		mySide = SmartDashboard.getString("Side", "LEFT");
@@ -175,7 +165,6 @@ public class Robot extends IterativeRobot {
 
 		//Get selected autonomous command (again, not using due to auto setup)
 		//autonomousCommand = chooser.getSelected();
-
 
 		//Start game data timer
 		timer.start();
@@ -231,11 +220,11 @@ public class Robot extends IterativeRobot {
 
 					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
 					{
-						//autonomousCommand = new AutoRobotCenterSwitchLeft();
+						autonomousCommand = new AutoRobotCenterSwitchLeft();
 					}
 					else
 					{
-						//autonomousCommand = new AutoRobotCenterSwitchRight();
+						autonomousCommand = new AutoRobotCenterSwitchRight();
 					}
 
 				}

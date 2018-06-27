@@ -40,8 +40,10 @@ public class RobotMap {
 	public static final double ANGLE_END_EFFECTOR_SPEED = -.65;//this will angle the arm up because the polarity of the Talon is reversed.  check on competition bot.
 	public static final double DOWN_ANGLE_END_EFFECTOR_SPEED = .5; //this angles down (see above). may need to change for competition bot.
 	public static final double DRIVE_SPEED = 0.8;
-	public static double AUTO_DRIVE_SPEED = .95;
-	public static double AUTO_TURN_SPEED = 0.3;
+	public static final double AUTO_DRIVE_SPEED = .95;
+	public static final double AUTO_TURN_SPEED = 0.3;
+	public static final double ELEVATOR_UP_SPEED = .9;
+	public static final double ELEVATOR_DOWN_SPEED = -.3;
 
 	//Miscellaneous
 	public static int DIRECTION_MULTIPLIER = 1;
@@ -49,7 +51,7 @@ public class RobotMap {
 	public static double STRAIGHT_ANGLE_TOLERANCE = .01;
 	public static double TURN_ANGLE_TOLERANCE = .001;
 	public static char AUTO_SWITCH_POSITION;
-	public static char AUTO_SCALE_POSITION;
+	//public static char AUTO_SCALE_POSITION;
 
 	//PID values
 	public static double kP_Straight = 0.03;
@@ -74,9 +76,9 @@ public class RobotMap {
 	public static int DRIVE_GEAR_RATIO = 5;
 
 	//Elevator target positions
-	public static final double dPosSwitch = 30 ;
-	public static final double dPosPyramid = 10;
-	public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
+	//public static final double dPosSwitch = 30 ;
+	//public static final double dPosPyramid = 10;
+	//public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
 
 	//Elevator drive ratios
 	public static final int kMotorGearRatio = 5 ;

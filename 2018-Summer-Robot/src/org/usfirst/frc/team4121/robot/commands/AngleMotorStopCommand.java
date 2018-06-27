@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopAngleMotorCommand extends Command {
+public class AngleMotorStopCommand extends Command {
 
-    public StopAngleMotorCommand() {
+    public AngleMotorStopCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.end);
     }

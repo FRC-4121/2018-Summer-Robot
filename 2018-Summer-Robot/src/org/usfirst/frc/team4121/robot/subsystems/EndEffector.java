@@ -19,13 +19,9 @@ public class EndEffector extends Subsystem {
 	public WPI_TalonSRX endmotor1 = new WPI_TalonSRX(RobotMap.ENDMOTOR1);
 	public WPI_TalonSRX endmotor2 = new WPI_TalonSRX(RobotMap.ENDMOTOR2);
 	public WPI_TalonSRX anglemotor = new WPI_TalonSRX(RobotMap.ANGLEMOTOR);
-	public Servo leftServo = new Servo(8);
-	public Servo rightServo = new Servo(9);
 	
 	private Timer wheelTimer = new Timer();
 	private double startTime;
-	
-	
 	
 	//solenoid setup
 	Compressor compressor = new Compressor(RobotMap.COMPRESSOR); //change this value

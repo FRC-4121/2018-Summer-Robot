@@ -8,13 +8,13 @@ import org.usfirst.frc.team4121.robot.commands.ElevatorToHomeCommand;
 import org.usfirst.frc.team4121.robot.commands.ElevatorToSwitchCommand;
 import org.usfirst.frc.team4121.robot.commands.OpenArmsCommand;
 import org.usfirst.frc.team4121.robot.commands.ShiftGearCommand;
-import org.usfirst.frc.team4121.robot.commands.StopAngleMotorCommand;
+import org.usfirst.frc.team4121.robot.commands.AngleMotorStopCommand;
 import org.usfirst.frc.team4121.robot.commands.SwitchDriveCommand;
 import org.usfirst.frc.team4121.robot.commands.TakeInCubeCommandGroup;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -30,6 +30,7 @@ public class OI {
 	//General Declarations of Objects
 	public XboxController xbox;
 	public ADXRS450_Gyro MainGyro;
+	public DigitalInput elevatorTopLimit, elevatorBottomLimit;
 	public Encoder rightEncoder, leftEncoder;
 	public Button shiftGear, switchDrive;
 	public Button elevatorHome, elevatorSwitch, angleUp, angleDown;
@@ -40,12 +41,14 @@ public class OI {
 		
 		//Initialize gyro
 		MainGyro = new ADXRS450_Gyro();
-		
+
+		//Initialize elevator limit switches
+		elevatorTopLimit = new DigitalInput(0);
+		elevatorBottomLimit = new DigitalInput(1);
+			
 		//Define xbox controller
 		xbox = new XboxController(0);
 
-		
-		
 		//Xbox controller buttons
 		elevatorHome = new JoystickButton(xbox, 1); //a button
 		elevatorSwitch = new JoystickButton(xbox, 2); //b button
@@ -66,9 +69,9 @@ public class OI {
 		switchDrive.whenPressed(new SwitchDriveCommand());
 		
 		angleUp.whileHeld(new AngleMotorCommand());
-		angleUp.whenReleased(new StopAngleMotorCommand());
+		angleUp.whenReleased(new AngleMotorStopCommand());
 		angleDown.whileHeld(new AngleMotorReverseCommand());
-		angleDown.whenReleased(new StopAngleMotorCommand());
+		angleDown.whenReleased(new AngleMotorStopCommand());
 		
 		elevatorSwitch.whenPressed(new ElevatorToSwitchCommand());
 		elevatorHome.whenPressed(new ElevatorToHomeCommand());
