@@ -102,6 +102,9 @@ public class Robot extends IterativeRobot {
 		//Initialize Smartdashboard entries
 		SmartDashboard.putString("Target", myTarget);
 		SmartDashboard.putString("Side", mySide);
+		
+		//Calibrate the main gyro (this may not be the correct method)
+		Robot.oi.MainGyro.calibrate();
 
 	}
 
@@ -149,6 +152,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 
+		//System.out.println("Auto started");
+		
 		//Set auto flags
 		autoCommandStarted = false;
 
@@ -160,14 +165,15 @@ public class Robot extends IterativeRobot {
 		RobotMap.RIGHT_STARTING_POSITION = Robot.driveTrain.getRightEncoderPosition();
 
 		//Get game related data from SmartDashboard
-		mySide = SmartDashboard.getString("Side", "LEFT");
-		myTarget = SmartDashboard.getString("Target", "SWITCH");
+		//mySide = SmartDashboard.getString("Side", "LEFT");
+		//myTarget = SmartDashboard.getString("Target", "SWITCH");
 
 		//Get selected autonomous command (again, not using due to auto setup)
 		//autonomousCommand = chooser.getSelected();
 
 		//Start game data timer
 		timer.start();
+		//System.out.println("Game data timer started");
 		startTime = timer.get();
 
 	}
@@ -203,6 +209,7 @@ public class Robot extends IterativeRobot {
 				RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0);
 
 				autonomousCommand = new AutoStraightCommandGroup();
+				//System.out.println("Auto command initialized");
 				
 				//determine which command to run
 //				if (mySide.toUpperCase().equals("LEFT"))

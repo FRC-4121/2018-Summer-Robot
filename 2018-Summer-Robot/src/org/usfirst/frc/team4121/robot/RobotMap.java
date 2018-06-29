@@ -38,10 +38,10 @@ public class RobotMap {
 	
 	//Motor Speeds
 	public static final double END_EFFECTOR_SPEED = .5;
-	public static final double ANGLE_END_EFFECTOR_SPEED = -.65;//this will angle the arm up because the polarity of the Talon is reversed.  check on competition bot.
+	public static final double ANGLE_END_EFFECTOR_SPEED = -.85;//this will angle the arm up because the polarity of the Talon is reversed.  check on competition bot.
 	public static final double DOWN_ANGLE_END_EFFECTOR_SPEED = .5; //this angles down (see above). may need to change for competition bot.
-	public static final double DRIVE_SPEED = 0.8;
-	public static final double AUTO_DRIVE_SPEED = .95;
+	public static final double DRIVE_SPEED = 0.65;
+	public static final double AUTO_DRIVE_SPEED = .90;
 	public static final double AUTO_TURN_SPEED = 0.3;
 	public static final double ELEVATOR_UP_SPEED = .9;
 	public static final double ELEVATOR_DOWN_SPEED = -.3;
