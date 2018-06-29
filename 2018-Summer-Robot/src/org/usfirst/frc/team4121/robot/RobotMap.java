@@ -23,17 +23,19 @@ public class RobotMap {
 //	public static final int ANGLEMOTOR = 9;
 
 //	Motor Controller Constants - !!!!FIX THESE FOR NEW RoBOT!
-	public static final int LEFT_MOTOR_MASTER = 7;
-	public static final int LEFT_MOTOR_SLAVE_1 = 15;
-	public static final int LEFT_MOTOR_SLAVE_2 = 100000;
-	public static final int RIGHT_MOTOR_MASTER = 4;
-	public static final int RIGHT_MOTOR_SLAVE_1 = 1;
-	public static final int RIGHT_MOTOR_SLAVE_2 = 1000;
-	public static final int ENDMOTOR1 = 6;
-	public static final int ENDMOTOR2 = 3; 
-	public static final int ELEVATOR_MOTOR_MASTER = 2;
-	public static final int ANGLEMOTOR = 9; //need to change value
+	public static final int LEFT_MOTOR_MASTER = 3;
+	public static final int LEFT_MOTOR_SLAVE_1 = 1;
+	public static final int LEFT_MOTOR_SLAVE_2 = 2;
+	public static final int RIGHT_MOTOR_MASTER = 14;
+	public static final int RIGHT_MOTOR_SLAVE_1 = 0;
+	public static final int RIGHT_MOTOR_SLAVE_2 = 13;
+	public static final int ENDMOTOR2 = 11; 
+	public static final int ELEVATOR_MOTOR_MASTER = 12;
 
+	//Spark Motor Controllers
+	public static final int ENDMOTOR1 = 0;
+	public static final int ANGLEMOTOR = 1;
+	
 	//Motor Speeds
 	public static final double END_EFFECTOR_SPEED = .5;
 	public static final double ANGLE_END_EFFECTOR_SPEED = -.65;//this will angle the arm up because the polarity of the Talon is reversed.  check on competition bot.
@@ -75,9 +77,9 @@ public class RobotMap {
 	public static int DRIVE_GEAR_RATIO = 5;
 
 	//Elevator target positions
-	//public static final double dPosSwitch = 30 ;
+	public static final double dPosSwitch = 30 ;
 	//public static final double dPosPyramid = 10;
-	//public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
+	public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
 
 	//Elevator drive ratios
 	public static final int kMotorGearRatio = 5 ;

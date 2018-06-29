@@ -30,7 +30,7 @@ public class OI {
 	//General Declarations of Objects
 	public XboxController xbox;
 	public ADXRS450_Gyro MainGyro;
-	public DigitalInput elevatorTopLimit, elevatorBottomLimit;
+	//public DigitalInput elevatorTopLimit, elevatorBottomLimit;
 	public Encoder rightEncoder, leftEncoder;
 	public Button shiftGear, switchDrive;
 	public Button elevatorHome, elevatorSwitch, angleUp, angleDown;
@@ -43,11 +43,11 @@ public class OI {
 		MainGyro = new ADXRS450_Gyro();
 
 		//Initialize elevator limit switches
-		elevatorTopLimit = new DigitalInput(0);
-		elevatorBottomLimit = new DigitalInput(1);
+//		elevatorTopLimit = new DigitalInput(0);
+//		elevatorBottomLimit = new DigitalInput(1);
 			
 		//Define xbox controller
-		xbox = new XboxController(0);
+		xbox = new XboxController(2);
 
 		//Xbox controller buttons
 		elevatorHome = new JoystickButton(xbox, 1); //a button

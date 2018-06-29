@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShifterSubsystem extends Subsystem {
 	
+	
 	//Initializes the compressor
 	Compressor compressor = new Compressor(RobotMap.COMPRESSOR);
 	

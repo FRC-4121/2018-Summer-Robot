@@ -202,44 +202,46 @@ public class Robot extends IterativeRobot {
 				gameData = testGameData;
 				RobotMap.AUTO_SWITCH_POSITION = gameData.charAt(0);
 
+				autonomousCommand = new AutoStraightCommandGroup();
+				
 				//determine which command to run
-				if (mySide.toUpperCase().equals("LEFT"))
-				{
-					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-					{
-						autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
-					}
-					else
-					{
-						autonomousCommand = new AutoStraightCommandGroup();							
-					}
-
-				}
-				else if (mySide.toUpperCase().equals("CENTER"))
-				{
-
-					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
-					{
-						autonomousCommand = new AutoRobotCenterSwitchLeft();
-					}
-					else
-					{
-						autonomousCommand = new AutoRobotCenterSwitchRight();
-					}
-
-				}
-				else
-				{
-					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-					{
-						autonomousCommand = new AutoStraightCommandGroup();														
-					}
-					else
-					{
-						autonomousCommand = new AutoRobotRightSwitchRight1Cube();
-					}
-
-				}
+//				if (mySide.toUpperCase().equals("LEFT"))
+//				{
+//					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
+//					{
+//						autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
+//					}
+//					else
+//					{
+//						autonomousCommand = new AutoStraightCommandGroup();							
+//					}
+//
+//				}
+//				else if (mySide.toUpperCase().equals("CENTER"))
+//				{
+//
+//					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
+//					{
+//						autonomousCommand = new AutoRobotCenterSwitchLeft();
+//					}
+//					else
+//					{
+//						autonomousCommand = new AutoRobotCenterSwitchRight();
+//					}
+//
+//				}
+//				else
+//				{
+//					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
+//					{
+//						autonomousCommand = new AutoStraightCommandGroup();														
+//					}
+//					else
+//					{
+//						autonomousCommand = new AutoRobotRightSwitchRight1Cube();
+//					}
+//
+//				}
 
 			}
 
@@ -289,6 +291,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putString("Gear Postion: ", shifter.gearPosition());
 		SmartDashboard.putString("Drive Direction:", Integer.toString(RobotMap.DIRECTION_MULTIPLIER));
 
+		SmartDashboard.putNumber("Drive Angle: ", Robot.oi.MainGyro.getAngle());
 		//SmartDashboard.putNumber("Master Current", Robot.elevator.m_motor.getOutputCurrent());
 		//SmartDashboard.putNumber("Slave Current", Robot.elevator.m_motor2_follower.getOutputCurrent());
 		//SmartDashboard.putNumber("Master Output", Robot.elevator.m_motor.getMotorOutputPercent());

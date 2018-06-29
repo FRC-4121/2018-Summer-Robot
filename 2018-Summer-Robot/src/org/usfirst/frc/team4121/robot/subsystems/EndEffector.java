@@ -83,16 +83,5 @@ public class EndEffector extends Subsystem {
     	
     }
     
-    public void openServos() {
-    	leftServo.set(.5);//.5
-    	rightServo.set(.5);
-    
-    }
-    
-    public void closeServos() {
-    	leftServo.set(0);
-    	rightServo.set(.9);
-    }
-  
 }
 
