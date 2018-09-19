@@ -5,8 +5,6 @@ package org.usfirst.frc.team4121.robot;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
- * 
- * @author Hen "traitor" Bayden thanks ben for showing up 
  */
 public class RobotMap {
 
@@ -52,7 +50,6 @@ public class RobotMap {
 	public static double STRAIGHT_ANGLE_TOLERANCE = .01;
 	public static double TURN_ANGLE_TOLERANCE = .001;
 	public static char AUTO_SWITCH_POSITION;
-	//public static char AUTO_SCALE_POSITION;
 
 	//PID values
 	public static double kP_Straight = 0.03;
@@ -77,7 +74,7 @@ public class RobotMap {
 	public static int DRIVE_GEAR_RATIO = 5;
 
 	//Elevator target positions
-	public static final double dPosSwitch = 30 ;
+	public static final double dPosSwitch = 27 ;
 	//public static final double dPosPyramid = 10;
 	public static final double dFudgeFactor = 1.135 ;  // actual distance/programmed distance
 
