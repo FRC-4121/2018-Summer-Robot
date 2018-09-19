@@ -212,43 +212,43 @@ public class Robot extends IterativeRobot {
 				//System.out.println("Auto command initialized");
 				
 				//determine which command to run
-//				if (mySide.toUpperCase().equals("LEFT"))
-//				{
-//					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-//					{
-//						autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
-//					}
-//					else
-//					{
-//						autonomousCommand = new AutoStraightCommandGroup();							
-//					}
-//
-//				}
-//				else if (mySide.toUpperCase().equals("CENTER"))
-//				{
-//
-//					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
-//					{
-//						autonomousCommand = new AutoRobotCenterSwitchLeft();
-//					}
-//					else
-//					{
-//						autonomousCommand = new AutoRobotCenterSwitchRight();
-//					}
-//
-//				}
-//				else
-//				{
-//					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
-//					{
-//						autonomousCommand = new AutoStraightCommandGroup();														
-//					}
-//					else
-//					{
-//						autonomousCommand = new AutoRobotRightSwitchRight1Cube();
-//					}
-//
-//				}
+				if (mySide.toUpperCase().equals("LEFT"))
+				{
+					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
+					{
+						autonomousCommand = new AutoRobotLeftSwitchLeft1Cube();
+					}
+					else
+					{
+						autonomousCommand = new AutoStraightCommandGroup();							
+					}
+
+				}
+				else if (mySide.toUpperCase().equals("CENTER"))
+				{
+
+					if(RobotMap.AUTO_SWITCH_POSITION == 'L') 
+					{
+						autonomousCommand = new AutoRobotCenterSwitchLeft();
+					}
+					else
+					{
+						autonomousCommand = new AutoRobotCenterSwitchRight();
+					}
+
+				}
+				else
+				{
+					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
+					{
+						autonomousCommand = new AutoStraightCommandGroup();														
+					}
+					else
+					{
+						autonomousCommand = new AutoRobotRightSwitchRight1Cube();
+					}
+
+				}
 
 			}
 
