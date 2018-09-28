@@ -11,10 +11,5 @@ public class TakeInCubeCommandGroup extends CommandGroup {
        
     	addSequential(new ClosedArmsCommand());
     	addSequential(new SpinWheelsInCommand());
-    	
-    
-    	
-       //addSequential(new ElevatorToSwitchCommand());
-
     }
 }

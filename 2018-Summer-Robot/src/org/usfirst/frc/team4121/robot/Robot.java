@@ -60,7 +60,7 @@ public class Robot extends IterativeRobot {
 	public double startTime;
 	public double stopTime;
 	private boolean autoCommandStarted = false;
-	public static String myTarget;
+	//public static String myTarget;
 	public static String mySide;
 
 
@@ -97,10 +97,10 @@ public class Robot extends IterativeRobot {
 		distanceTraveled = 0.0;
 		angleTraveled = 0.0;
 		mySide = "";
-		myTarget = "";
+		//myTarget = "";
 
 		//Initialize Smartdashboard entries
-		SmartDashboard.putString("Target", myTarget);
+		//SmartDashboard.putString("Target", myTarget);
 		SmartDashboard.putString("Side", mySide);
 		
 		//Calibrate the main gyro (this may not be the correct method)
@@ -165,7 +165,7 @@ public class Robot extends IterativeRobot {
 		RobotMap.RIGHT_STARTING_POSITION = Robot.driveTrain.getRightEncoderPosition();
 
 		//Get game related data from SmartDashboard
-		//mySide = SmartDashboard.getString("Side", "LEFT");
+		mySide = SmartDashboard.getString("Side", "LEFT");
 		//myTarget = SmartDashboard.getString("Target", "SWITCH");
 
 		//Get selected autonomous command (again, not using due to auto setup)

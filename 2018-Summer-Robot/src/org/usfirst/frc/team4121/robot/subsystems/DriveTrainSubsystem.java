@@ -84,13 +84,7 @@ public class DriveTrainSubsystem extends Subsystem {
 
 	//Drive method that creates two tank drives with the left and right joysticks
 	public void drive() {
-		//		
-		//		double targetPositionRotationsLeft =  RobotMap.kTimeoutMs * 4096; //need to do math in here
-		//		leftMotorFront.set(ControlMode.Position, targetPositionRotationsLeft);
-		//		double targetPositionRotationsRight =  RobotMap.kTimeoutMs * 4096; //need to do math in here
-		//		rightMotorRear.set(ControlMode.Position, targetPositionRotationsRight);
-		//		
-		//controls
+
 		if(RobotMap.DIRECTION_MULTIPLIER==1)
 		{
 			drive.tankDrive(Robot.oi.xbox.getY(Hand.kLeft)*RobotMap.DIRECTION_MULTIPLIER, Robot.oi.xbox.getY(Hand.kRight)*RobotMap.DIRECTION_MULTIPLIER);
@@ -101,8 +95,8 @@ public class DriveTrainSubsystem extends Subsystem {
 		}
 
 
-		//		SmartDashboard.putNumber("Left Sensor position", leftMotorMaster.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
-		//		SmartDashboard.putNumber("Right Sensor position", rightMotorMaster.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		//SmartDashboard.putNumber("Left Sensor position", leftMotorMaster.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		//SmartDashboard.putNumber("Right Sensor position", rightMotorMaster.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
 		SmartDashboard.putNumber("Left Output", leftMotorMaster.getMotorOutputPercent());
 		SmartDashboard.putNumber("Right Output", rightMotorMaster.getMotorOutputPercent());
 
