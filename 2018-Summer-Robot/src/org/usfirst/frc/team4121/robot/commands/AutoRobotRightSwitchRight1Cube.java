@@ -11,9 +11,9 @@ public class AutoRobotRightSwitchRight1Cube extends CommandGroup {
 
     	addSequential(new BeginningMatchCommandGroup());
     	addSequential(new ElevatorToSwitchCommand());
-    	addSequential(new AutoDrive(50, -1, 0, 7)); //drive to switch
-    	addSequential(new AutoTurn(-50, 1.5));
-    	addSequential(new EjectCubeCommand(-1.0));
+    	addSequential(new AutoDrive(60, -1, 0, 7)); //drive to switch
+    	addSequential(new AutoTurn(-45, 1.5));
+    	addSequential(new EjectCubeCommandGroup());
     
     }
 }
