@@ -237,6 +237,11 @@ public class Robot extends IterativeRobot {
 					}
 
 				}
+				else if (mySide.toUpperCase().equals("STRAIGHT")) {
+					
+					autonomousCommand = new AutoStraightCommandGroup();
+					
+				}
 				else
 				{
 					if (RobotMap.AUTO_SWITCH_POSITION == 'L')
